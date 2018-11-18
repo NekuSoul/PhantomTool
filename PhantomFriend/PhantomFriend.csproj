@@ -63,6 +63,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Data\Card.cs" />
+    <Compile Include="Data\Collection.cs" />
+    <Compile Include="Importer\CardImporter.cs" />
+    <Compile Include="Importer\CollectionImporter.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
