@@ -22,9 +22,33 @@ namespace PhantomFriend
 			InitializeComponent();
 			Cards = CardImporter.ImportCards();
 			Collection = CollectionImporter.ImportCollection(Cards);
+			
+			OutputCardList(GetSealedList());
 		}
 
 		private void ButtonClicked(object sender, RoutedEventArgs e)
+		{
+			OutputCardList(GetSealedList());
+		}
+
+		private void OutputCardList(CardAmount[] sealedDeck)
+		{
+			sealedDeck = GetSealedList();
+
+			StringBuilder deckExport = new StringBuilder();
+
+			foreach (var cardAmount in sealedDeck)
+			{
+				deckExport.AppendLine(cardAmount.ToDeckImportFormat());
+			}
+
+			OutputTextBox.Text = deckExport.ToString();
+			OutputTextBox.SelectionStart = 0;
+			OutputTextBox.SelectionLength = OutputTextBox.Text.Length;
+			OutputTextBox.Focus();
+		}
+
+		private CardAmount[] GetSealedList()
 		{
 			List<Card> cards = new List<Card>();
 
@@ -61,16 +85,8 @@ namespace PhantomFriend
 				from card in cards
 				group card by card
 				into groupedCards
-				select new CardAmount { Amount = groupedCards.Count(), Card = groupedCards.Key };
-
-			StringBuilder deckExport = new StringBuilder();
-
-			foreach (var cardAmount in sealedDeck)
-			{
-				deckExport.AppendLine(cardAmount.ToDeckImportFormat());
-			}
-
-			OutputTextBox.Text = deckExport.ToString();
+				select new CardAmount {Amount = groupedCards.Count(), Card = groupedCards.Key};
+			return sealedDeck.ToArray();
 		}
 	}
 }
