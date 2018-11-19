@@ -33,8 +33,6 @@ namespace PhantomFriend
 
 		private void OutputCardList(CardAmount[] sealedDeck)
 		{
-			sealedDeck = GetSealedList();
-
 			StringBuilder deckExport = new StringBuilder();
 
 			foreach (var cardAmount in sealedDeck)
