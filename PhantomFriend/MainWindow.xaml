@@ -5,8 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PhantomFriend"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="PhantomFriends" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBox Name="OutputTextBox" VerticalScrollBarVisibility="Visible"></TextBox>
+        <Button Grid.Row="1" Click="ButtonClicked">Generate Phantom Sealed Challenge</Button>
     </Grid>
 </Window>
