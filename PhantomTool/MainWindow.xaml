@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PhantomFriend"
         mc:Ignorable="d"
-        Title="PhantomFriends" Height="800" Width="400" WindowStartupLocation="CenterScreen">
+        Title="PhantomTool" Height="800" Width="400" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>

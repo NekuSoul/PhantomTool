@@ -50,7 +50,7 @@ namespace PhantomFriend
 		{
 			List<Card> cards = new List<Card>();
 
-			while (cards.Count < 90)
+			while (cards.Count < 150)
 			{
 				var inputBytes = new byte[1024];
 				Random.GetBytes(inputBytes);
@@ -74,7 +74,7 @@ namespace PhantomFriend
 
 					cards.Add(selectedCard);
 
-					if (cards.Count == 90)
+					if (cards.Count == 150)
 						break;
 				}
 			}
