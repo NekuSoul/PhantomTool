@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:phantomTool="clr-namespace:NekuSoul.PhantomTool"
         mc:Ignorable="d"
-        Title="PhantomTool" Height="800" Width="600" WindowStartupLocation="CenterScreen" TextOptions.TextFormattingMode="Display">
+        Title="PhantomTool" Height="800" Width="Auto" SizeToContent="Width" WindowStartupLocation="CenterScreen" TextOptions.TextFormattingMode="Display" ResizeMode="CanMinimize">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File">
@@ -23,12 +23,15 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="300"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="300"/>
             </Grid.ColumnDefinitions>
             <phantomTool:GenerationSettingsControl x:Name="GenerationSettingsControl"/>
             <Button Grid.Column="0" Grid.Row="1" Click="ButtonClicked">Generate new Phantom Sealed challenge</Button>
-            <ListBox Grid.Column="1" Grid.Row="0" Name="OutputListBox"/>
-            <Button Grid.Column="1" Grid.Row="1" Click="ClipBoardButtonClicked">Copy to clipboard</Button>
+            <ListBox Grid.Column="1" Grid.Row="0" Name="OutputListBoxA"/>
+            <Button Grid.Column="1" Grid.Row="1" Click="ClipBoardButtonAClicked">Copy to clipboard</Button>
+            <ListBox Grid.Column="2" Grid.Row="0" Name="OutputListBoxB"/>
+            <Button Grid.Column="2" Grid.Row="1" Click="ClipBoardButtonBClicked">Copy to clipboard</Button>
         </Grid>
     </DockPanel>
 </Window>

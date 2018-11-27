@@ -29,11 +29,11 @@ namespace NekuSoul.PhantomTool
 
 		private void OutputCardList(CardAmount[] sealedDeck)
 		{
-			OutputListBox.Items.Clear();
+			OutputListBoxA.Items.Clear();
 
 			foreach (var cardAmount in sealedDeck)
 			{
-				OutputListBox.Items.Add(new ListBoxItem {Content = cardAmount, ToolTip = cardAmount.Card.Name});
+				OutputListBoxA.Items.Add(new ListBoxItem {Content = cardAmount, ToolTip = cardAmount.Card.Name});
 			}
 		}
 
@@ -58,11 +58,21 @@ namespace NekuSoul.PhantomTool
 			StatusLabel.Content = $"{_collection.CollectedCards.Sum(ca => ca.Amount)} cards out of {GameData.Cards.Length * 4} cards collected.";
 		}
 
-		private void ClipBoardButtonClicked(object sender, RoutedEventArgs e)
+		private void ClipBoardButtonAClicked(object sender, RoutedEventArgs e)
+		{
+			SetClipboardText(OutputListBoxA);
+		}
+
+		private void ClipBoardButtonBClicked(object sender, RoutedEventArgs e)
+		{
+			SetClipboardText(OutputListBoxB);
+		}
+
+		private void SetClipboardText(ListBox listBox)
 		{
 			StringBuilder deckExport = new StringBuilder();
 
-			foreach (ListBoxItem item in OutputListBox.Items)
+			foreach (ListBoxItem item in listBox.Items)
 			{
 				deckExport.AppendLine((item.Content as CardAmount)?.ToDeckImportFormat());
 			}
