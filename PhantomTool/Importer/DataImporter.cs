@@ -1,13 +1,12 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Text;
+using NekuSoul.PhantomTool.Data;
 using Newtonsoft.Json;
-using PhantomFriend.Data;
 
-namespace PhantomFriend.Importer
+namespace NekuSoul.PhantomTool.Importer
 {
-	internal static class CardImporter
+	internal static class DataImporter
 	{
 		internal static Card[] ImportCards()
 		{
@@ -41,13 +40,13 @@ namespace PhantomFriend.Importer
 			var cards = JsonConvert.DeserializeObject<JsonCardFile>(jsonExcerpt.ToString()).JsonCards;
 
 			return (from jsonCard in cards
-					select new Card
-					{
-						CollectorNumber = jsonCard.CollectorNumber,
-						Id = jsonCard.Id,
-						Name = jsonLocalizations.First(l => l.Id == jsonCard.LocalizationId).Text,
-						Set = jsonCard.Set
-					}).ToArray();
+						 select new Card
+						 {
+							 CollectorNumber = jsonCard.CollectorNumber,
+							 Id = jsonCard.Id,
+							 Name = jsonLocalizations.First(l => l.Id == jsonCard.LocalizationId).Text,
+							 Set = jsonCard.Set
+						 }).ToArray();
 		}
 
 		private static JsonLocalization[] GetLocalizations()

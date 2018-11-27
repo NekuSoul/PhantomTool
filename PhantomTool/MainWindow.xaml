@@ -1,17 +1,34 @@
-﻿<Window x:Class="PhantomFriend.MainWindow"
+﻿<Window x:Class="NekuSoul.PhantomTool.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PhantomFriend"
+        xmlns:phantomTool="clr-namespace:NekuSoul.PhantomTool"
         mc:Ignorable="d"
-        Title="PhantomTool" Height="800" Width="400" WindowStartupLocation="CenterScreen">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <TextBox Name="OutputTextBox" VerticalScrollBarVisibility="Visible"></TextBox>
-        <Button Grid.Row="1" Click="ButtonClicked">Generate new Phantom Sealed challenge</Button>
-    </Grid>
+        Title="PhantomTool" Height="800" Width="600" WindowStartupLocation="CenterScreen" TextOptions.TextFormattingMode="Display">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="Refresh Collection" Click="MenuItemRefreshCollection_Click"/>
+                <MenuItem Header="Exit" Click="MenuItemExit_Click"/>
+            </MenuItem>
+        </Menu>
+        <StatusBar DockPanel.Dock="Bottom">
+            <Label Name="StatusLabel">StatusBarText</Label>
+        </StatusBar>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <phantomTool:GenerationSettingsControl x:Name="GenerationSettingsControl"/>
+            <Button Grid.Column="0" Grid.Row="1" Click="ButtonClicked">Generate new Phantom Sealed challenge</Button>
+            <TextBox Grid.Column="1" Grid.Row="0" Name="OutputTextBox" VerticalScrollBarVisibility="Visible"></TextBox>
+            <Button Grid.Column="1" Grid.Row="1" Click="ClipBoardButtonClicked">Copy to clipboard</Button>
+        </Grid>
+    </DockPanel>
 </Window>

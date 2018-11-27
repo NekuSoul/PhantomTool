@@ -1,6 +1,6 @@
 ﻿using Microsoft.Win32;
 
-namespace PhantomFriend
+namespace NekuSoul.PhantomTool
 {
 	internal static class Helper
 	{

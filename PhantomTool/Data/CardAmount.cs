@@ -1,4 +1,4 @@
-﻿namespace PhantomFriend.Data
+﻿namespace NekuSoul.PhantomTool.Data
 {
 	public class CardAmount
 	{

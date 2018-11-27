@@ -3,32 +3,29 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows;
-using PhantomFriend.Data;
-using PhantomFriend.Importer;
+using NekuSoul.PhantomTool.Data;
+using NekuSoul.PhantomTool.Generator;
+using NekuSoul.PhantomTool.Importer;
 
-namespace PhantomFriend
+namespace NekuSoul.PhantomTool
 {
 	/// <summary>
 	/// Interaction logic for MainWindow.xaml
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		private static readonly RNGCryptoServiceProvider Random = new RNGCryptoServiceProvider();
-		protected internal CardCollection Collection;
-		protected internal Card[] Cards;
+		private CardCollection _collection = new CardCollection();
 
 		public MainWindow()
 		{
 			InitializeComponent();
-			Cards = CardImporter.ImportCards();
-			Collection = CollectionImporter.ImportCollection(Cards);
-			
-			OutputCardList(GetSealedList());
+			UpdateStatusLabel();
+			RefreshCollection();
 		}
 
 		private void ButtonClicked(object sender, RoutedEventArgs e)
 		{
-			OutputCardList(GetSealedList());
+			OutputCardList(SealedGenerator.GetSealedList(GenerationSettingsControl.GetSettings(), _collection));
 		}
 
 		private void OutputCardList(CardAmount[] sealedDeck)
@@ -41,50 +38,32 @@ namespace PhantomFriend
 			}
 
 			OutputTextBox.Text = deckExport.ToString();
-			OutputTextBox.SelectionStart = 0;
-			OutputTextBox.SelectionLength = OutputTextBox.Text.Length;
-			OutputTextBox.Focus();
 		}
 
-		private CardAmount[] GetSealedList()
+		private void MenuItemRefreshCollection_Click(object sender, RoutedEventArgs e)
 		{
-			List<Card> cards = new List<Card>();
+			RefreshCollection();
+		}
 
-			while (cards.Count < 150)
-			{
-				var inputBytes = new byte[1024];
-				Random.GetBytes(inputBytes);
+		private void MenuItemExit_Click(object sender, RoutedEventArgs e)
+		{
+			Close();
+		}
 
-				for (int i = 0; i < inputBytes.Length; i += 2)
-				{
-					int position = inputBytes[i] + (inputBytes[i + 1] << 8);
+		private void RefreshCollection()
+		{
+			_collection = CollectionImporter.ImportCollection();
+			UpdateStatusLabel();
+		}
 
-					if (position >= Cards.Length)
-						continue;
+		private void UpdateStatusLabel()
+		{
+			StatusLabel.Content = $"{_collection.CollectedCards.Sum(ca => ca.Amount)} cards out of {GameData.Cards.Length * 4} cards collected.";
+		}
 
-					Card selectedCard = Cards[position];
-
-					CardAmount collectionAmount = Collection.CollectedCards.FirstOrDefault(ca => ca.Card == selectedCard);
-
-					if (collectionAmount == null)
-						continue;
-
-					if (cards.Count(c => c == selectedCard) >= collectionAmount.Amount)
-						continue;
-
-					cards.Add(selectedCard);
-
-					if (cards.Count == 150)
-						break;
-				}
-			}
-
-			var sealedDeck =
-				from card in cards
-				group card by card
-				into groupedCards
-				select new CardAmount {Amount = groupedCards.Count(), Card = groupedCards.Key};
-			return sealedDeck.ToArray();
+		private void ClipBoardButtonClicked(object sender, RoutedEventArgs e)
+		{
+			Clipboard.SetText(OutputTextBox.Text);
 		}
 	}
 }
