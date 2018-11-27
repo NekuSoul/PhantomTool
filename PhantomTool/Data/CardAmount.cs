@@ -9,6 +9,6 @@
 			=> $"{Amount} {Card.Name} ({Card.Set}) {Card.CollectorNumber}";
 
 		public override string ToString()
-			=> $"[{Amount}] {Card.Id}: {Card.Name} ({Card.Set}) {Card.CollectorNumber}";
+			=> ToDeckImportFormat();
 	}
 }

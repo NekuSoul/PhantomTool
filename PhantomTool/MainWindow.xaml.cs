@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
+﻿using System.Linq;
 using System.Text;
 using System.Windows;
+using System.Windows.Controls;
 using NekuSoul.PhantomTool.Data;
 using NekuSoul.PhantomTool.Generator;
 using NekuSoul.PhantomTool.Importer;
@@ -30,14 +29,12 @@ namespace NekuSoul.PhantomTool
 
 		private void OutputCardList(CardAmount[] sealedDeck)
 		{
-			StringBuilder deckExport = new StringBuilder();
+			OutputListBox.Items.Clear();
 
 			foreach (var cardAmount in sealedDeck)
 			{
-				deckExport.AppendLine(cardAmount.ToDeckImportFormat());
+				OutputListBox.Items.Add(new ListBoxItem {Content = cardAmount, ToolTip = cardAmount.Card.Name});
 			}
-
-			OutputTextBox.Text = deckExport.ToString();
 		}
 
 		private void MenuItemRefreshCollection_Click(object sender, RoutedEventArgs e)
@@ -63,7 +60,14 @@ namespace NekuSoul.PhantomTool
 
 		private void ClipBoardButtonClicked(object sender, RoutedEventArgs e)
 		{
-			Clipboard.SetText(OutputTextBox.Text);
+			StringBuilder deckExport = new StringBuilder();
+
+			foreach (ListBoxItem item in OutputListBox.Items)
+			{
+				deckExport.AppendLine((item.Content as CardAmount)?.ToDeckImportFormat());
+			}
+
+			Clipboard.SetText(deckExport.ToString());
 		}
 	}
 }

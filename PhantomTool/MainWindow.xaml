@@ -27,7 +27,7 @@
             </Grid.ColumnDefinitions>
             <phantomTool:GenerationSettingsControl x:Name="GenerationSettingsControl"/>
             <Button Grid.Column="0" Grid.Row="1" Click="ButtonClicked">Generate new Phantom Sealed challenge</Button>
-            <TextBox Grid.Column="1" Grid.Row="0" Name="OutputTextBox" VerticalScrollBarVisibility="Visible"></TextBox>
+            <ListBox Grid.Column="1" Grid.Row="0" Name="OutputListBox"/>
             <Button Grid.Column="1" Grid.Row="1" Click="ClipBoardButtonClicked">Copy to clipboard</Button>
         </Grid>
     </DockPanel>
