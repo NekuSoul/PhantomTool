@@ -1,4 +1,6 @@
-﻿using Microsoft.Win32;
+﻿using System;
+using System.IO;
+using Microsoft.Win32;
 
 namespace NekuSoul.PhantomTool
 {
@@ -10,5 +12,10 @@ namespace NekuSoul.PhantomTool
 			const string registryValue = "Path";
 			return Registry.GetValue(registryPath, registryValue, null).ToString();
 		}
+
+		internal static string GetAppDataPath() => Path.Combine(
+			Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+			"NekuSoul",
+			"PhantomTool");
 	}
 }
