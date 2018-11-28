@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace NekuSoul.PhantomTool.Data
 {
@@ -16,14 +17,14 @@ namespace NekuSoul.PhantomTool.Data
 		public string Cost;
 		public int ConvertedCost;
 
-		public override string ToString() 
+		public override string ToString()
 			=> $"{Id}: {Name} ({Set}) {CollectorNumber}";
 
 		public string GetDescription()
 		{
-			StringBuilder description=new StringBuilder();
+			StringBuilder description = new StringBuilder();
 
-			description.AppendLine($"{Name} - {Cost}");
+			description.AppendLine($"{Name} - {Cost.Replace("o", string.Empty)}");
 
 			description.Append(CardType);
 
@@ -36,12 +37,12 @@ namespace NekuSoul.PhantomTool.Data
 				description.AppendLine();
 
 				int length = 0;
-				foreach (string word in Text.Split(' '))
+				foreach (string word in GetCleanText().Split(' '))
 				{
-					if (length + word.Length > 50)
+					if (length + word.Length > 40)
 					{
 						description.AppendLine();
-						length=0;
+						length = 0;
 					}
 
 					description.Append(word);
@@ -53,5 +54,10 @@ namespace NekuSoul.PhantomTool.Data
 
 			return description.ToString();
 		}
+
+		private string GetCleanText()
+			=> Regex.Replace(Text, @"{.+}", m => m.Value.Replace("o", string.Empty))
+				.Replace("<i>", string.Empty)
+				.Replace("</i>", string.Empty);
 	}
 }
