@@ -14,6 +14,7 @@ namespace NekuSoul.PhantomTool.Data
 		public string CardType;
 		public string Text;
 		public string Cost;
+		public int ConvertedCost;
 
 		public override string ToString() 
 			=> $"{Id}: {Name} ({Set}) {CollectorNumber}";

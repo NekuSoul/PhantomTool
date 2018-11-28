@@ -45,7 +45,7 @@ namespace NekuSoul.PhantomTool.Generator
 				from card in cards
 				group card by card
 				into groupedCards
-				orderby groupedCards.Key.Name
+				orderby groupedCards.Key.ConvertedCost, groupedCards.Key.Name
 				select new CardAmount { Amount = groupedCards.Count(), Card = groupedCards.Key };
 			return sealedDeck.ToArray();
 		}

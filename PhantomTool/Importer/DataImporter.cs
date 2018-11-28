@@ -49,7 +49,8 @@ namespace NekuSoul.PhantomTool.Importer
 						SubType = jsonLocalizations.FirstOrDefault(l => l.Id == jsonCard.SubTypeId)?.Text,
 						Set = jsonCard.Set,
 						Text = jsonLocalizations.FirstOrDefault(l => l.Id == jsonCard.Abilities.FirstOrDefault()?.TextId)?.Text,
-						Cost = jsonCard.Cost
+						Cost = jsonCard.Cost,
+						ConvertedCost = jsonCard.ConvertedCost
 					}).ToArray();
 		}
 
@@ -144,6 +145,9 @@ namespace NekuSoul.PhantomTool.Importer
 
 			[JsonProperty("castingcost")]
 			public string Cost;
+
+			[JsonProperty("cmc")]
+			public int ConvertedCost;
 
 			[JsonProperty("subtypeTextId")]
 			public int SubTypeId = -1;
