@@ -5,7 +5,7 @@ namespace NekuSoul.PhantomTool.Data
 {
 	public static class GameData
 	{
-		public static Card[] Cards { get; private set; }
+		public static Card[] Cards { get; }
 		public static string[] Sets { get; }
 		public static string[] PlayableSets { get; }
 

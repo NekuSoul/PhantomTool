@@ -33,7 +33,7 @@ namespace NekuSoul.PhantomTool
 
 			foreach (var cardAmount in sealedDeck)
 			{
-				OutputListBoxA.Items.Add(new ListBoxItem {Content = cardAmount, ToolTip = cardAmount.Card.Name});
+				OutputListBoxA.Items.Add(new ListBoxItem {Content = cardAmount, ToolTip = cardAmount.Card.GetDescription()});
 			}
 		}
 

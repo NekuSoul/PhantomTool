@@ -40,13 +40,17 @@ namespace NekuSoul.PhantomTool.Importer
 			var cards = JsonConvert.DeserializeObject<JsonCardFile>(jsonExcerpt.ToString()).JsonCards;
 
 			return (from jsonCard in cards
-						 select new Card
-						 {
-							 CollectorNumber = jsonCard.CollectorNumber,
-							 Id = jsonCard.Id,
-							 Name = jsonLocalizations.First(l => l.Id == jsonCard.LocalizationId).Text,
-							 Set = jsonCard.Set
-						 }).ToArray();
+					select new Card
+					{
+						CollectorNumber = jsonCard.CollectorNumber,
+						Id = jsonCard.Id,
+						Name = jsonLocalizations.First(l => l.Id == jsonCard.LocalizationId).Text,
+						CardType = jsonLocalizations.First(l => l.Id == jsonCard.CardTypeId).Text,
+						SubType = jsonLocalizations.FirstOrDefault(l => l.Id == jsonCard.SubTypeId)?.Text,
+						Set = jsonCard.Set,
+						Text = jsonLocalizations.FirstOrDefault(l => l.Id == jsonCard.Abilities.FirstOrDefault()?.TextId)?.Text,
+						Cost = jsonCard.Cost
+					}).ToArray();
 		}
 
 		private static JsonLocalization[] GetLocalizations()
@@ -104,6 +108,16 @@ namespace NekuSoul.PhantomTool.Importer
 		}
 
 		[JsonObject(MemberSerialization.OptIn)]
+		private class JsonAbility
+		{
+			[JsonProperty("abilityId")]
+			public int Id = -1;
+
+			[JsonProperty("textId")]
+			public int TextId = -1;
+		}
+
+		[JsonObject(MemberSerialization.OptIn)]
 		private class JsonLocalization
 		{
 			[JsonProperty("id")]
@@ -121,6 +135,21 @@ namespace NekuSoul.PhantomTool.Importer
 
 			[JsonProperty("titleId")]
 			public int LocalizationId = -1;
+
+			[JsonProperty("cardtypeTextId")]
+			public int CardTypeId = -1;
+
+			[JsonProperty("abilities")]
+			public JsonAbility[] Abilities;
+
+			[JsonProperty("castingcost")]
+			public string Cost;
+
+			[JsonProperty("subtypeTextId")]
+			public int SubTypeId = -1;
+
+			[JsonProperty("rarity")]
+			public int Rarity = -1;
 
 			[JsonProperty("set")]
 			public string Set = string.Empty;
