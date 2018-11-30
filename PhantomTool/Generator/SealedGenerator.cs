@@ -9,36 +9,28 @@ namespace NekuSoul.PhantomTool.Generator
 	{
 		public static CardAmount[] GetSealedList(GeneratorSettings settings, CardCollection collection)
 		{
-			List<Card> cards = new List<Card>();
-			Random random = settings.Seed == null ? new Random() : new Random(settings.Seed.GetHashCode());
-			Card[] filteredCards = GameData.Cards;
+			var cards = new List<Card>();
+			var random = settings.Seed == null ? new Random() : new Random(settings.Seed.GetHashCode());
+			var baseFilteredCards = (from c in collection.CollectedCards where c.Amount > 0 select c.Card).ToList();
 
 			if (settings.Sets.Any())
-				filteredCards = filteredCards.Where(c => settings.Sets.Contains(c.Set)).ToArray();
+				baseFilteredCards.RemoveAll(c => !settings.Sets.Contains(c.Set));
 
-			int mercyKill = 100000;
+			baseFilteredCards = baseFilteredCards.ToList();
 
 			while (cards.Count < settings.Amount)
 			{
-				if (mercyKill-- == 0)
+				if (baseFilteredCards.Count == 0)
 					return new CardAmount[0];
 
-				int position = random.Next(filteredCards.Length);
+				int position = random.Next(baseFilteredCards.Count);
 
-				if (position >= GameData.Cards.Length)
-					continue;
-
-				Card selectedCard = filteredCards[position];
-
-				CardAmount collectionAmount = collection.CollectedCards.FirstOrDefault(ca => ca.Card == selectedCard);
-
-				if (collectionAmount == null)
-					continue;
-
-				if (cards.Count(c => c == selectedCard) >= collectionAmount.Amount)
-					continue;
+				var selectedCard = baseFilteredCards[position];
 
 				cards.Add(selectedCard);
+
+				if (cards.Count(c => c == selectedCard) == collection.CollectedCards.First(c => c.Card == selectedCard).Amount)
+					baseFilteredCards.Remove(selectedCard);
 			}
 
 			var sealedDeck =
