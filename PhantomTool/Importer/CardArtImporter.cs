@@ -32,9 +32,14 @@ namespace NekuSoul.PhantomTool.Importer
 					if (!(obj is Texture2D texture2D))
 						continue;
 
+					string fileName = Path.Combine(cardArtPath, $"{texture2D.m_Name}.png");
+
+					if (File.Exists(fileName))
+						continue;
+
 					var texture2DConverter = new Texture2DConverter(texture2D);
 					var bitmap = texture2DConverter.ConvertToBitmap(true);
-					bitmap.Save(Path.Combine(cardArtPath, $"{texture2D.m_Name}.png"));
+					bitmap.Save(fileName);
 				}
 			}
 		}
