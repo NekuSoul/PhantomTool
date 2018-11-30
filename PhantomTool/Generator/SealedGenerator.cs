@@ -11,8 +11,11 @@ namespace NekuSoul.PhantomTool.Generator
 		{
 			var cards = new List<Card>();
 			var random = settings.Seed == null ? new Random() : new Random(settings.Seed.GetHashCode());
+
+			// Start the pool with all collected cards.
 			var baseFilteredCards = (from c in collection.CollectedCards where c.Amount > 0 select c.Card).ToList();
 
+			// Filter by selected sets, if any sets are selected.
 			if (settings.Sets.Any())
 				baseFilteredCards.RemoveAll(c => !settings.Sets.Contains(c.Set));
 
@@ -20,19 +23,20 @@ namespace NekuSoul.PhantomTool.Generator
 
 			while (cards.Count < settings.Amount)
 			{
+				// Check if any choices for valid cards are left.
 				if (baseFilteredCards.Count == 0)
 					return new CardAmount[0];
 
-				int position = random.Next(baseFilteredCards.Count);
-
-				var selectedCard = baseFilteredCards[position];
-
+				// Randomly choose next card.
+				var selectedCard = baseFilteredCards[random.Next(baseFilteredCards.Count)];
 				cards.Add(selectedCard);
 
+				// Remove selected card from cardpool if maximum available amount has been added.
 				if (cards.Count(c => c == selectedCard) == collection.CollectedCards.First(c => c.Card == selectedCard).Amount)
 					baseFilteredCards.Remove(selectedCard);
 			}
 
+			// Group cards and return result.
 			var sealedDeck =
 				from card in cards
 				group card by card
