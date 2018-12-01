@@ -2,6 +2,7 @@
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using NekuSoul.PhantomTool.Data;
 using NekuSoul.PhantomTool.Generator;
 using NekuSoul.PhantomTool.Importer;
@@ -33,7 +34,7 @@ namespace NekuSoul.PhantomTool
 
 			foreach (var cardAmount in sealedDeck)
 			{
-				OutputListBoxA.Items.Add(new ListBoxItem {Content = cardAmount, ToolTip = cardAmount.Card.GetDescription()});
+				OutputListBoxA.Items.Add(new ListBoxItem { Content = cardAmount, ToolTip = cardAmount.Card.GetDescription() });
 			}
 		}
 
@@ -83,6 +84,41 @@ namespace NekuSoul.PhantomTool
 		private void MenuItemExtractCardArt_Click(object sender, RoutedEventArgs e)
 		{
 			CardArtImporter.ImportCardArt(GameData.Sets);
+		}
+
+		private void MoveLeftButton_Click(object sender, RoutedEventArgs e)
+		{
+			MoveCard(OutputListBoxB, OutputListBoxA);
+		}
+
+		private void MoveRightButton_Click(object sender, RoutedEventArgs e)
+		{
+			MoveCard(OutputListBoxA, OutputListBoxB);
+		}
+
+		private static void MoveCard(ListBox source, ListBox target)
+		{
+			if (!((source.SelectedItem as ListBoxItem)?.Content is CardAmount selectedItem))
+				return;
+
+			if (selectedItem.Amount == 1)
+				source.Items.Remove(source.SelectedItem);
+			else
+			{
+				selectedItem.Amount--;
+				((ListBoxItem)source.SelectedItem).Content = null;
+				((ListBoxItem)source.SelectedItem).Content = selectedItem;
+			}
+
+			if (target.Items.Cast<ListBoxItem>().FirstOrDefault(lb => (lb.Content as CardAmount).Card == selectedItem.Card) is ListBoxItem lbi)
+			{
+				((CardAmount)lbi.Content).Amount++;
+				var temp = lbi.Content;
+				lbi.Content = null;
+				lbi.Content = temp;
+			}
+			else
+				target.Items.Add(new ListBoxItem { Content = new CardAmount { Amount = 1, Card = selectedItem.Card }, ToolTip = selectedItem.Card.GetDescription() });
 		}
 	}
 }

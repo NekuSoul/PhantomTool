@@ -32,8 +32,8 @@
             <phantomTool:GenerationSettingsControl x:Name="GenerationSettingsControl"/>
             <Button Grid.Column="0" Grid.Row="1" Click="ButtonClicked">Generate new Phantom Sealed challenge</Button>
             <StackPanel Grid.Column="3" Grid.Row="0" VerticalAlignment="Center">
-                <Button Name="MoveRightButton">&lt;</Button>
-                <Button Name="MoveLeftButton">&gt;</Button>
+                <Button Name="MoveRightButton" Click="MoveLeftButton_Click">&lt;</Button>
+                <Button Name="MoveLeftButton" Click="MoveRightButton_Click">&gt;</Button>
             </StackPanel>
             <ListBox Grid.Column="2" Grid.Row="0" Name="OutputListBoxA"/>
             <Button Grid.Column="2" Grid.Row="1" Click="ClipBoardButtonAClicked">Copy to clipboard</Button>
