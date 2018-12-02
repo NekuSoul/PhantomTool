@@ -36,6 +36,9 @@ namespace NekuSoul.PhantomTool.Data
 			if (SubType != null)
 				description.Append($" - {SubType}");
 
+			description.AppendLine();
+			description.Append($"[{Set}] {Rarity} ({CollectorNumber})");
+
 			if (Text != null)
 			{
 				description.AppendLine();

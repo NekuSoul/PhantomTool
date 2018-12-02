@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NekuSoul.PhantomTool.Data;
+using Type = NekuSoul.PhantomTool.Data.Type;
 
 namespace NekuSoul.PhantomTool.Generator
 {
@@ -21,7 +22,7 @@ namespace NekuSoul.PhantomTool.Generator
 
 			baseFilteredCards = baseFilteredCards.ToList();
 
-			Stack<CardRestiction> cardRestictions = new Stack<CardRestiction>(settings.PerPickRestrictions);
+			var cardRestictions = new Stack<CardRestiction>(settings.PerPickRestrictions);
 			while (cards.Count < settings.Amount)
 			{
 				// Get next card restriction.
@@ -29,19 +30,20 @@ namespace NekuSoul.PhantomTool.Generator
 
 				// Filter by current card restriction.
 				var perCardFilteredCards = cardRestiction != null
-				   ? baseFilteredCards.Where(c => cardRestiction(c)).ToList()
-				   : baseFilteredCards;
+					? baseFilteredCards.Where(c => cardRestiction(c)).ToList()
+					: baseFilteredCards;
 
 				// Check if any choices for valid cards are left.
 				if (perCardFilteredCards.Count == 0)
-					return new CardAmount[0];
+					return new[] { new CardAmount { Amount = 1, Card = GetWhiskers() } };
 
 				// Randomly choose next card.
 				var selectedCard = perCardFilteredCards[random.Next(perCardFilteredCards.Count)];
 				cards.Add(selectedCard);
 
 				// Remove selected card from cardpool if maximum available amount has been added.
-				if (cards.Count(c => c == selectedCard) == collection.CollectedCards.First(c => c.Card == selectedCard).Amount)
+				if (cards.Count(c => c == selectedCard) ==
+					collection.CollectedCards.First(c => c.Card == selectedCard).Amount)
 					baseFilteredCards.Remove(selectedCard);
 			}
 
@@ -53,6 +55,22 @@ namespace NekuSoul.PhantomTool.Generator
 				orderby groupedCards.Key.ConvertedCost, groupedCards.Key.Name
 				select new CardAmount { Amount = groupedCards.Count(), Card = groupedCards.Key };
 			return sealedDeck.ToArray();
+		}
+
+		private static Card GetWhiskers()
+		{
+			return new Card
+			{
+				Cost = "G",
+				Name = "Whiskers - Master of missing Cards",
+				Rarity = Rarity.Mythic,
+				CollectorNumber = "🐱",
+				CardType = "Legendary Cat",
+				Types = new[] { Type.Creature },
+				Set = "CAT",
+				SubType = "Stray cat",
+				Text = "Couldn't find enough cards with the currently active filters. Sorry, have this cat instead."
+			};
 		}
 	}
 }
