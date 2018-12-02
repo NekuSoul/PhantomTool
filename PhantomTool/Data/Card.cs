@@ -16,6 +16,11 @@ namespace NekuSoul.PhantomTool.Data
 		public string Text;
 		public string Cost;
 		public int ConvertedCost;
+		public Rarity Rarity;
+		public bool Craftable;
+		public bool Collectible;
+
+		public Type[] Types;
 
 		public override string ToString()
 			=> $"{Id}: {Name} ({Set}) {CollectorNumber}";
@@ -59,5 +64,26 @@ namespace NekuSoul.PhantomTool.Data
 			=> Regex.Replace(Text, @"{.+}", m => m.Value.Replace("o", string.Empty))
 				.Replace("<i>", string.Empty)
 				.Replace("</i>", string.Empty);
+	}
+
+	public enum Rarity
+	{
+		Tokens = 0,
+		Basic = 1,
+		Common = 2,
+		Uncommon = 3,
+		Rare = 4,
+		Mythic = 5
+	}
+
+	public enum Type
+	{
+		Artifact = 1,
+		Creature = 2,
+		Enchantment = 3,
+		Instant = 4,
+		Land = 5,
+		Planeswalker = 8,
+		Sorcery = 10
 	}
 }

@@ -21,14 +21,23 @@ namespace NekuSoul.PhantomTool.Generator
 
 			baseFilteredCards = baseFilteredCards.ToList();
 
+			Stack<CardRestiction> cardRestictions = new Stack<CardRestiction>(settings.PerPickRestrictions);
 			while (cards.Count < settings.Amount)
 			{
+				// Get next card restriction.
+				var cardRestiction = cardRestictions.Count > 0 ? cardRestictions.Pop() : null;
+
+				// Filter by current card restriction.
+				var perCardFilteredCards = cardRestiction != null
+				   ? baseFilteredCards.Where(c => cardRestiction(c)).ToList()
+				   : baseFilteredCards;
+
 				// Check if any choices for valid cards are left.
-				if (baseFilteredCards.Count == 0)
+				if (perCardFilteredCards.Count == 0)
 					return new CardAmount[0];
 
 				// Randomly choose next card.
-				var selectedCard = baseFilteredCards[random.Next(baseFilteredCards.Count)];
+				var selectedCard = perCardFilteredCards[random.Next(perCardFilteredCards.Count)];
 				cards.Add(selectedCard);
 
 				// Remove selected card from cardpool if maximum available amount has been added.

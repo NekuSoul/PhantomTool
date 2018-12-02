@@ -50,7 +50,11 @@ namespace NekuSoul.PhantomTool.Importer
 						Set = jsonCard.Set,
 						Text = jsonLocalizations.FirstOrDefault(l => l.Id == jsonCard.Abilities.FirstOrDefault()?.TextId)?.Text,
 						Cost = jsonCard.Cost,
-						ConvertedCost = jsonCard.ConvertedCost
+						ConvertedCost = jsonCard.ConvertedCost,
+						Collectible = jsonCard.isCollectible,
+						Craftable = jsonCard.isCraftable,
+						Rarity = (Rarity)jsonCard.Rarity,
+						Types = jsonCard.Types.Select(t => (Type)t).ToArray()
 					}).ToArray();
 		}
 
@@ -140,8 +144,17 @@ namespace NekuSoul.PhantomTool.Importer
 			[JsonProperty("cardtypeTextId")]
 			public int CardTypeId = -1;
 
+			[JsonProperty("isCollectible")]
+			public bool isCollectible = false;
+
+			[JsonProperty("isCraftable")]
+			public bool isCraftable = false;
+
 			[JsonProperty("abilities")]
 			public JsonAbility[] Abilities;
+
+			[JsonProperty("types")]
+			public int[] Types;
 
 			[JsonProperty("castingcost")]
 			public string Cost;

@@ -8,10 +8,12 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="300">
     <StackPanel>
+        <Label>Presets:</Label>
+        <CheckBox Name="SealedRuleCheckBox" Checked="SealedRuleCheckBox_Checked" Unchecked="SealedRuleCheckBox_Unchecked">Use Sealed rules</CheckBox>
         <Label>Amount:</Label>
         <DockPanel>
             <xctk:IntegerUpDown Name="AmountIntegerUpDown" DockPanel.Dock="Right" Minimum="1" Maximum="250" Width="45" HorizontalContentAlignment="Right" Value="90" ValueChanged="AmountIntegerUpDown_ValueChanged"/>
-            <Slider Name="AmountSlider" Minimum="1" Maximum="250" Value="90" SmallChange="1" LargeChange="10" IsSnapToTickEnabled="True" ValueChanged="AmountSlider_ValueChanged" TickPlacement="Both"/>
+            <Slider Name="AmountSlider" Minimum="1" Maximum="250" Value="90" SmallChange="1" LargeChange="10" IsSnapToTickEnabled="True" ValueChanged="AmountSlider_ValueChanged"/>
         </DockPanel>
         <Label>Sets:</Label>
         <xctk:CheckListBox Name="SetCheckListBox" HorizontalContentAlignment="Stretch"/>
