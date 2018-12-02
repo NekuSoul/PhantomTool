@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using NekuSoul.PhantomTool.Data;
 using NekuSoul.PhantomTool.Generator;
-using Type = NekuSoul.PhantomTool.Data.Type;
 
 namespace NekuSoul.PhantomTool
 {
@@ -44,10 +43,10 @@ namespace NekuSoul.PhantomTool
 			{
 				List<CardRestiction> restrictions = new List<CardRestiction>();
 
-				restrictions.AddRange(Enumerable.Repeat<CardRestiction>(c => c.Types.All(t => t != Type.Land) && c.Rarity == Rarity.Common, 10 * 6));
-				restrictions.AddRange(Enumerable.Repeat<CardRestiction>(c => c.Types.All(t => t != Type.Land) && c.Rarity == Rarity.Uncommon, 3 * 6));
-				restrictions.AddRange(Enumerable.Repeat<CardRestiction>(c => c.Types.All(t => t != Type.Land) && c.Rarity == Rarity.Rare || c.Rarity == Rarity.Mythic, 1 * 6));
-				restrictions.AddRange(Enumerable.Repeat<CardRestiction>(c => c.Types.Any(t => t == Type.Land), 1 * 6));
+				restrictions.AddRange(Enumerable.Repeat<CardRestiction>(c => c.CardTypes.All(t => t != CardType.Land) && c.CardRarity == CardRarity.Common, 10 * 6));
+				restrictions.AddRange(Enumerable.Repeat<CardRestiction>(c => c.CardTypes.All(t => t != CardType.Land) && c.CardRarity == CardRarity.Uncommon, 3 * 6));
+				restrictions.AddRange(Enumerable.Repeat<CardRestiction>(c => c.CardTypes.All(t => t != CardType.Land) && c.CardRarity == CardRarity.Rare || c.CardRarity == CardRarity.Mythic, 1 * 6));
+				restrictions.AddRange(Enumerable.Repeat<CardRestiction>(c => c.CardTypes.Any(t => t == CardType.Land), 1 * 6));
 
 				return new GeneratorSettings
 				{

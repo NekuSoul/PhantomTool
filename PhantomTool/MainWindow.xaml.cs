@@ -1,9 +1,7 @@
-﻿using System.ComponentModel;
-using System.Linq;
+﻿using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using NekuSoul.PhantomTool.Controls;
 using NekuSoul.PhantomTool.Data;
 using NekuSoul.PhantomTool.Generator;

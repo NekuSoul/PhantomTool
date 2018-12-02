@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using NekuSoul.PhantomTool.Data;
 using Newtonsoft.Json;
-using Type = NekuSoul.PhantomTool.Data.Type;
 
 namespace NekuSoul.PhantomTool.Importer
 {
@@ -55,8 +54,8 @@ namespace NekuSoul.PhantomTool.Importer
 						ConvertedCost = jsonCard.ConvertedCost,
 						Collectible = jsonCard.IsCollectible,
 						Craftable = jsonCard.IsCraftable,
-						Rarity = (Rarity)jsonCard.Rarity,
-						Types = jsonCard.Types.Select(t => (Type)t).ToArray(),
+						CardRarity = (CardRarity)jsonCard.Rarity,
+						CardTypes = jsonCard.Types.Select(t => (CardType)t).ToArray(),
 						CardArt = jsonCard.ArtUrl
 					}).ToArray();
 		}

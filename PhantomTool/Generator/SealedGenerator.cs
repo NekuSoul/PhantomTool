@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using NekuSoul.PhantomTool.Data;
-using Type = NekuSoul.PhantomTool.Data.Type;
 
 namespace NekuSoul.PhantomTool.Generator
 {
@@ -63,10 +62,10 @@ namespace NekuSoul.PhantomTool.Generator
 			{
 				Cost = "G",
 				Name = "Whiskers, Master of missing Cards",
-				Rarity = Rarity.Mythic,
+				CardRarity = CardRarity.Mythic,
 				CollectorNumber = "🐱",
 				CardType = "Legendary Cat",
-				Types = new[] { Type.Creature },
+				CardTypes = new[] { CardType.Creature },
 				CardArt = "403322",
 				Set = "CAT",
 				SubType = "Stray cat",

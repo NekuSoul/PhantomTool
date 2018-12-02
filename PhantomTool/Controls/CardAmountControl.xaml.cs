@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Text.RegularExpressions;
-using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using NekuSoul.PhantomTool.Data;
@@ -29,18 +28,18 @@ namespace NekuSoul.PhantomTool.Controls
 			else
 				ThumbnailImage.Source = new BitmapImage(new Uri(GetImagePath(), UriKind.Absolute));
 
-			switch (CardAmount.Card.Rarity)
+			switch (CardAmount.Card.CardRarity)
 			{
-				case Rarity.Common:
+				case CardRarity.Common:
 					RarityLabel.Background = new SolidColorBrush(Color.FromRgb(0, 0, 0));
 					break;
-				case Rarity.Uncommon:
+				case CardRarity.Uncommon:
 					RarityLabel.Background = new SolidColorBrush(Color.FromRgb(185, 185, 185));
 					break;
-				case Rarity.Rare:
+				case CardRarity.Rare:
 					RarityLabel.Background = new SolidColorBrush(Color.FromRgb(204, 153, 0));
 					break;
-				case Rarity.Mythic:
+				case CardRarity.Mythic:
 					RarityLabel.Background = new SolidColorBrush(Color.FromRgb(255, 102, 0));
 					break;
 			}

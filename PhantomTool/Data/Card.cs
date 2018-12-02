@@ -1,8 +1,5 @@
-﻿using System;
-using System.Linq;
-using System.Text;
+﻿using System.Text;
 using System.Text.RegularExpressions;
-using Xceed.Wpf.Toolkit.Core.Converters;
 
 namespace NekuSoul.PhantomTool.Data
 {
@@ -17,12 +14,12 @@ namespace NekuSoul.PhantomTool.Data
 		public string Text;
 		public string Cost;
 		public int ConvertedCost;
-		public Rarity Rarity;
+		public CardRarity CardRarity;
 		public bool Craftable;
 		public bool Collectible;
 		public string CardArt;
 
-		public Type[] Types;
+		public CardType[] CardTypes;
 
 		public override string ToString()
 			=> $"{Id}: {Name} ({Set}) {CollectorNumber}";
@@ -39,7 +36,7 @@ namespace NekuSoul.PhantomTool.Data
 				description.Append($" - {SubType}");
 
 			description.AppendLine();
-			description.Append($"[{Set}] {Rarity} ({CollectorNumber})");
+			description.Append($"[{Set}] {CardRarity} ({CollectorNumber})");
 
 			if (Text != null)
 			{
@@ -71,7 +68,7 @@ namespace NekuSoul.PhantomTool.Data
 				.Replace("</i>", string.Empty);
 	}
 
-	public enum Rarity
+	public enum CardRarity
 	{
 		Tokens = 0,
 		Basic = 1,
@@ -81,7 +78,7 @@ namespace NekuSoul.PhantomTool.Data
 		Mythic = 5
 	}
 
-	public enum Type
+	public enum CardType
 	{
 		Artifact = 1,
 		Creature = 2,
