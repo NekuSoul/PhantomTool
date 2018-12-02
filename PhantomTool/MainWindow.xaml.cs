@@ -36,6 +36,8 @@ namespace NekuSoul.PhantomTool
 			{
 				OutputListBoxA.Items.Add(new CardAmountControl(cardAmount));
 			}
+
+			UpdateCounters();
 		}
 
 		private void MenuItemRefreshCollection_Click(object sender, RoutedEventArgs e)
@@ -89,21 +91,25 @@ namespace NekuSoul.PhantomTool
 		private void MoveLeftButton_Click(object sender, RoutedEventArgs e)
 		{
 			MoveCard(OutputListBoxB, OutputListBoxA);
+			UpdateCounters();
 		}
 
 		private void MoveRightButton_Click(object sender, RoutedEventArgs e)
 		{
 			MoveCard(OutputListBoxA, OutputListBoxB);
+			UpdateCounters();
 		}
 
 		private void OutputListBoxA_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
 		{
 			MoveCard(OutputListBoxA, OutputListBoxB);
+			UpdateCounters();
 		}
 
 		private void OutputListBoxB_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
 		{
 			MoveCard(OutputListBoxB, OutputListBoxA);
+			UpdateCounters();
 		}
 
 		private static void MoveCard(ListBox source, ListBox target)
@@ -138,6 +144,12 @@ namespace NekuSoul.PhantomTool
 				foreach (var control in tempList)
 					target.Items.Add(control);
 			}
+		}
+
+		private void UpdateCounters()
+		{
+			CounterALabel.Content = $"{(from c in OutputListBoxA.Items.Cast<CardAmountControl>() select c.CardAmount).Sum(ca => ca.Amount)} cards";
+			CounterBLabel.Content = $"{(from c in OutputListBoxB.Items.Cast<CardAmountControl>() select c.CardAmount).Sum(ca => ca.Amount)} cards";
 		}
 	}
 }

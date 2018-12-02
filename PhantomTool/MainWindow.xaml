@@ -35,10 +35,16 @@
                 <Button Name="MoveRightButton" Click="MoveLeftButton_Click" Height="32">&lt;</Button>
                 <Button Name="MoveLeftButton" Click="MoveRightButton_Click" Height="32">&gt;</Button>
             </StackPanel>
-            <ListBox Grid.Column="2" Grid.Row="0" Name="OutputListBoxA" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" MouseDoubleClick="OutputListBoxA_MouseDoubleClick"/>
-            <Button Grid.Column="2" Grid.Row="1" Click="ClipBoardButtonAClicked">Copy to clipboard</Button>
-            <ListBox Grid.Column="4" Grid.Row="0" Name="OutputListBoxB" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" MouseDoubleClick="OutputListBoxB_MouseDoubleClick"/>
-            <Button Grid.Column="4" Grid.Row="1" Click="ClipBoardButtonBClicked">Copy to clipboard</Button>
+            <DockPanel Grid.Column="2" Grid.Row="0">
+                <Label Name="CounterALabel" DockPanel.Dock="Top">0 cards</Label>
+                <Button DockPanel.Dock="Bottom" Click="ClipBoardButtonAClicked">Copy to clipboard</Button>
+                <ListBox Name="OutputListBoxA" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" MouseDoubleClick="OutputListBoxA_MouseDoubleClick"/>
+            </DockPanel>
+            <DockPanel Grid.Column="4" Grid.Row="0">
+                <Label Name="CounterBLabel" DockPanel.Dock="Top">0 cards</Label>
+                <Button DockPanel.Dock="Bottom" Click="ClipBoardButtonBClicked">Copy to clipboard</Button>
+                <ListBox Name="OutputListBoxB" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" MouseDoubleClick="OutputListBoxB_MouseDoubleClick"/>
+            </DockPanel>
         </Grid>
     </DockPanel>
 </Window>
