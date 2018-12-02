@@ -18,10 +18,6 @@
             <Label Name="StatusLabel">StatusBarText</Label>
         </StatusBar>
         <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="300"/>
                 <ColumnDefinition Width="30"/>
@@ -29,18 +25,20 @@
                 <ColumnDefinition Width="30"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <phantomTool:GenerationSettingsControl x:Name="GenerationSettingsControl"/>
-            <Button Grid.Column="0" Grid.Row="1" Click="ButtonClicked">Generate new Phantom Sealed challenge</Button>
-            <StackPanel Grid.Column="3" Grid.Row="0" VerticalAlignment="Center">
+            <DockPanel Grid.Column="0">
+                <Button DockPanel.Dock="Bottom" Click="ButtonClicked">Generate new Phantom Sealed challenge</Button>
+                <phantomTool:GenerationSettingsControl x:Name="GenerationSettingsControl"/>
+            </DockPanel>
+            <StackPanel Grid.Column="3" VerticalAlignment="Center">
                 <Button Name="MoveRightButton" Click="MoveLeftButton_Click" Height="32">&lt;</Button>
                 <Button Name="MoveLeftButton" Click="MoveRightButton_Click" Height="32">&gt;</Button>
             </StackPanel>
-            <DockPanel Grid.Column="2" Grid.Row="0">
+            <DockPanel Grid.Column="2">
                 <Label Name="CounterALabel" DockPanel.Dock="Top">0 cards</Label>
                 <Button DockPanel.Dock="Bottom" Click="ClipBoardButtonAClicked">Copy to clipboard</Button>
                 <ListBox Name="OutputListBoxA" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" MouseDoubleClick="OutputListBoxA_MouseDoubleClick"/>
             </DockPanel>
-            <DockPanel Grid.Column="4" Grid.Row="0">
+            <DockPanel Grid.Column="4">
                 <Label Name="CounterBLabel" DockPanel.Dock="Top">0 cards</Label>
                 <Button DockPanel.Dock="Bottom" Click="ClipBoardButtonBClicked">Copy to clipboard</Button>
                 <ListBox Name="OutputListBoxB" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" MouseDoubleClick="OutputListBoxB_MouseDoubleClick"/>
