@@ -61,7 +61,7 @@ namespace NekuSoul.PhantomTool.Generator
 			return new Card
 			{
 				Cost = "G",
-				Name = "Whiskers, Master of missing Cards",
+				Name = "Whiskers, Master of missing cards",
 				CardRarity = CardRarity.Mythic,
 				CollectorNumber = "🐱",
 				CardType = "Legendary Cat",
@@ -69,7 +69,7 @@ namespace NekuSoul.PhantomTool.Generator
 				CardArt = "403322",
 				Set = "CAT",
 				SubType = "Stray cat",
-				Text = "Couldn't find enough cards with the currently active filters. Sorry, have this cat instead."
+				Text = "Sorry, couldn't find enough cards with the currently active filters, so have this cat instead."
 			};
 		}
 	}
