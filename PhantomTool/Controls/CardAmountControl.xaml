@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="NekuSoul.PhantomTool.Controls.CardAmountControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NekuSoul.PhantomTool.Controls"
+             mc:Ignorable="d" 
+             Height="48" d:DesignWidth="250">
+    <DockPanel>
+        <Label Name="RarityLabel" DockPanel.Dock="Right" Width="4" Height="48" />
+        <Label Name="CostLabel" DockPanel.Dock="Right" VerticalContentAlignment="Center">WWGG</Label>
+        <Label Width="32" Name="AmountLabel" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="16">1x</Label>
+        <Image Height="48" Width="48" Name="ThumbnailImage"/>
+        <Label VerticalAlignment="Center">
+            <TextBlock Name="NameLabel" TextTrimming="CharacterEllipsis">Name</TextBlock>
+        </Label>
+    </DockPanel>
+</UserControl>

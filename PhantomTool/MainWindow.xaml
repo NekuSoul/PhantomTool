@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:phantomTool="clr-namespace:NekuSoul.PhantomTool"
         mc:Ignorable="d"
-        Title="PhantomTool" Height="800" Width="Auto" SizeToContent="Width" WindowStartupLocation="CenterScreen" TextOptions.TextFormattingMode="Display" ResizeMode="CanMinimize">
+        Title="PhantomTool" Height="800" Width="1000" MinHeight="500" MinWidth="800" WindowStartupLocation="CenterScreen" TextOptions.TextFormattingMode="Display">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File">
@@ -25,19 +25,19 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="300"/>
                 <ColumnDefinition Width="30"/>
-                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="30"/>
-                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <phantomTool:GenerationSettingsControl x:Name="GenerationSettingsControl"/>
             <Button Grid.Column="0" Grid.Row="1" Click="ButtonClicked">Generate new Phantom Sealed challenge</Button>
             <StackPanel Grid.Column="3" Grid.Row="0" VerticalAlignment="Center">
-                <Button Name="MoveRightButton" Click="MoveLeftButton_Click">&lt;</Button>
-                <Button Name="MoveLeftButton" Click="MoveRightButton_Click">&gt;</Button>
+                <Button Name="MoveRightButton" Click="MoveLeftButton_Click" Height="32">&lt;</Button>
+                <Button Name="MoveLeftButton" Click="MoveRightButton_Click" Height="32">&gt;</Button>
             </StackPanel>
-            <ListBox Grid.Column="2" Grid.Row="0" Name="OutputListBoxA"/>
+            <ListBox Grid.Column="2" Grid.Row="0" Name="OutputListBoxA" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" MouseDoubleClick="OutputListBoxA_MouseDoubleClick"/>
             <Button Grid.Column="2" Grid.Row="1" Click="ClipBoardButtonAClicked">Copy to clipboard</Button>
-            <ListBox Grid.Column="4" Grid.Row="0" Name="OutputListBoxB"/>
+            <ListBox Grid.Column="4" Grid.Row="0" Name="OutputListBoxB" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" MouseDoubleClick="OutputListBoxB_MouseDoubleClick"/>
             <Button Grid.Column="4" Grid.Row="1" Click="ClipBoardButtonBClicked">Copy to clipboard</Button>
         </Grid>
     </DockPanel>

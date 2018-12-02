@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using Xceed.Wpf.Toolkit.Core.Converters;
 
 namespace NekuSoul.PhantomTool.Data
 {
@@ -19,6 +20,7 @@ namespace NekuSoul.PhantomTool.Data
 		public Rarity Rarity;
 		public bool Craftable;
 		public bool Collectible;
+		public string CardArt;
 
 		public Type[] Types;
 

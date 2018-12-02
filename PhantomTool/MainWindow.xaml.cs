@@ -1,8 +1,10 @@
-﻿using System.Linq;
+﻿using System.ComponentModel;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using NekuSoul.PhantomTool.Controls;
 using NekuSoul.PhantomTool.Data;
 using NekuSoul.PhantomTool.Generator;
 using NekuSoul.PhantomTool.Importer;
@@ -34,7 +36,7 @@ namespace NekuSoul.PhantomTool
 
 			foreach (var cardAmount in sealedDeck)
 			{
-				OutputListBoxA.Items.Add(new ListBoxItem { Content = cardAmount, ToolTip = cardAmount.Card.GetDescription() });
+				OutputListBoxA.Items.Add(new CardAmountControl(cardAmount));
 			}
 		}
 
@@ -73,9 +75,9 @@ namespace NekuSoul.PhantomTool
 		{
 			StringBuilder deckExport = new StringBuilder();
 
-			foreach (ListBoxItem item in listBox.Items)
+			foreach (CardAmountControl item in listBox.Items)
 			{
-				deckExport.AppendLine((item.Content as CardAmount)?.ToDeckImportFormat());
+				deckExport.AppendLine(item.CardAmount.ToDeckImportFormat());
 			}
 
 			Clipboard.SetText(deckExport.ToString());
@@ -96,29 +98,48 @@ namespace NekuSoul.PhantomTool
 			MoveCard(OutputListBoxA, OutputListBoxB);
 		}
 
+		private void OutputListBoxA_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+		{
+			MoveCard(OutputListBoxA, OutputListBoxB);
+		}
+
+		private void OutputListBoxB_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+		{
+			MoveCard(OutputListBoxB, OutputListBoxA);
+		}
+
 		private static void MoveCard(ListBox source, ListBox target)
 		{
-			if (!((source.SelectedItem as ListBoxItem)?.Content is CardAmount selectedItem))
+			if (source.SelectedItem == null)
 				return;
 
-			if (selectedItem.Amount == 1)
+			var cardAmountControl = (CardAmountControl)source.SelectedItem;
+			var cardAmount = cardAmountControl.CardAmount;
+
+			if (cardAmount.Amount == 1)
 				source.Items.Remove(source.SelectedItem);
 			else
 			{
-				selectedItem.Amount--;
-				((ListBoxItem)source.SelectedItem).Content = null;
-				((ListBoxItem)source.SelectedItem).Content = selectedItem;
+				cardAmount.Amount--;
+				cardAmountControl.UpdateAmount();
 			}
 
-			if (target.Items.Cast<ListBoxItem>().FirstOrDefault(lb => (lb.Content as CardAmount).Card == selectedItem.Card) is ListBoxItem lbi)
+			if (target.Items.Cast<CardAmountControl>().FirstOrDefault(lb => lb.CardAmount.Card == cardAmount.Card) is CardAmountControl cac)
 			{
-				((CardAmount)lbi.Content).Amount++;
-				var temp = lbi.Content;
-				lbi.Content = null;
-				lbi.Content = temp;
+				cac.CardAmount.Amount++;
+				cac.UpdateAmount();
 			}
+
 			else
-				target.Items.Add(new ListBoxItem { Content = new CardAmount { Amount = 1, Card = selectedItem.Card }, ToolTip = selectedItem.Card.GetDescription() });
+			{
+				var tempList = target.Items.Cast<CardAmountControl>().ToList();
+				target.Items.Clear();
+				tempList.Add(new CardAmountControl(new CardAmount { Amount = 1, Card = cardAmount.Card }));
+				tempList = (from c in tempList orderby c.CardAmount.Card.ConvertedCost, c.CardAmount.Card.Name select c).ToList();
+
+				foreach (var control in tempList)
+					target.Items.Add(control);
+			}
 		}
 	}
 }

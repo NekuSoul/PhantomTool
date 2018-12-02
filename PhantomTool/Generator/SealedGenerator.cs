@@ -62,11 +62,12 @@ namespace NekuSoul.PhantomTool.Generator
 			return new Card
 			{
 				Cost = "G",
-				Name = "Whiskers - Master of missing Cards",
+				Name = "Whiskers, Master of missing Cards",
 				Rarity = Rarity.Mythic,
 				CollectorNumber = "🐱",
 				CardType = "Legendary Cat",
 				Types = new[] { Type.Creature },
+				CardArt = "403322",
 				Set = "CAT",
 				SubType = "Stray cat",
 				Text = "Couldn't find enough cards with the currently active filters. Sorry, have this cat instead."
