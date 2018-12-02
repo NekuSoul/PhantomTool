@@ -1,8 +1,10 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using System.Text;
 using NekuSoul.PhantomTool.Data;
 using Newtonsoft.Json;
+using Type = NekuSoul.PhantomTool.Data.Type;
 
 namespace NekuSoul.PhantomTool.Importer
 {
@@ -48,7 +50,7 @@ namespace NekuSoul.PhantomTool.Importer
 						CardType = jsonLocalizations.First(l => l.Id == jsonCard.CardTypeId).Text,
 						SubType = jsonLocalizations.FirstOrDefault(l => l.Id == jsonCard.SubTypeId)?.Text,
 						Set = jsonCard.Set,
-						Text = jsonLocalizations.FirstOrDefault(l => l.Id == jsonCard.Abilities.FirstOrDefault()?.TextId)?.Text,
+						Text = string.Join(Environment.NewLine, from a in jsonCard.Abilities select jsonLocalizations.First(l => l.Id == a.TextId).Text),
 						Cost = jsonCard.Cost,
 						ConvertedCost = jsonCard.ConvertedCost,
 						Collectible = jsonCard.IsCollectible,
@@ -162,7 +164,7 @@ namespace NekuSoul.PhantomTool.Importer
 
 			[JsonProperty("cmc")]
 			public int ConvertedCost;
-			
+
 			[JsonProperty("artUrl")]
 			public string ArtUrl = string.Empty;
 
