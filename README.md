@@ -26,7 +26,7 @@ Phantom Sealed generator for MTGA.
 * No collected cards are recognized.
   * Launch MTGA and exit after the main menu appears. Then select `File > Refresh collection`
 
-## Buiild
+## Build
 
 * This tool makes use of AssetStudio. Get the latest release [from here](https://github.com/Perfare/AssetStudio) and copy the following libraries into the `/Dependencies` folder:
   * AssetStudio.dll
