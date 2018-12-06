@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using NekuSoul.PhantomTool.Importer;
 
 namespace NekuSoul.PhantomTool.Data
@@ -13,7 +14,8 @@ namespace NekuSoul.PhantomTool.Data
 		{
 			Cards = DataImporter.ImportCards();
 			Sets = (from c in Cards select c.Set).Distinct().OrderBy(s => s).ToArray();
-			PlayableSets = Sets.Except(new[] {"ANA", "ArenaSUP"}).ToArray();
+			PlayableSets = Sets.Except(new[] { "ANA", "ArenaSUP" }).ToArray();
+			Task.Run(() => CardArtImporter.ImportCardArt(Sets));
 		}
 	}
 }

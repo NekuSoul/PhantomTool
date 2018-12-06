@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 
 namespace NekuSoul.PhantomTool
@@ -17,5 +18,18 @@ namespace NekuSoul.PhantomTool
 			Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
 			"NekuSoul",
 			"PhantomTool");
+
+		public static BitmapImage ToBitmapImage(this System.Drawing.Bitmap bitmap)
+		{         
+			MemoryStream memoryStream = new MemoryStream();
+			bitmap.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Bmp);
+			BitmapImage image = new BitmapImage();
+			memoryStream.Seek(0, SeekOrigin.Begin);
+			image.BeginInit();
+			image.StreamSource = memoryStream;
+			image.EndInit();
+
+			return image;
+		}
 	}
 }

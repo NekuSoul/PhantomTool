@@ -1,9 +1,13 @@
 ﻿using System;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using FMOD;
 using NekuSoul.PhantomTool.Data;
+using NekuSoul.PhantomTool.Importer;
 
 namespace NekuSoul.PhantomTool.Controls
 {
@@ -22,11 +26,7 @@ namespace NekuSoul.PhantomTool.Controls
 			NameLabel.Text = CardAmount.Card.Name;
 			ToolTip = CardAmount.Card.GetDescription();
 
-			string imagePath = GetImagePath();
-			if (string.IsNullOrEmpty(imagePath))
-				ThumbnailImage.Width = 0;
-			else
-				ThumbnailImage.Source = new BitmapImage(new Uri(GetImagePath(), UriKind.Absolute));
+			Task.Run(() => ApplyCardArt());
 
 			switch (CardAmount.Card.CardRarity)
 			{
@@ -49,21 +49,15 @@ namespace NekuSoul.PhantomTool.Controls
 			UpdateAmount();
 		}
 
-		private string GetImagePath()
-		{
-			string imagePath = Path.Combine(Helper.GetAppDataPath(), "CardArt", $"{CardAmount.Card.CardArt}_AIF.png");
-
-			return File.Exists(imagePath) ? imagePath : string.Empty;
-		}
-
 		public void UpdateAmount()
 		{
 			AmountLabel.Content = $"{CardAmount.Amount}x";
 		}
 
-		private string GetCleanText(string text)
-			=> Regex.Replace(text, @"{.+}", m => m.Value.Replace("o", string.Empty))
-				.Replace("<i>", string.Empty)
-				.Replace("</i>", string.Empty);
+		public void ApplyCardArt()
+		{
+			var cardArt = CardArtImporter.GetCardArt(CardAmount.Card);
+			Dispatcher.Invoke(() => ThumbnailImage.Source = cardArt.ToBitmapImage());
+		}
 	}
 }

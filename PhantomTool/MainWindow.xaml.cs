@@ -83,11 +83,6 @@ namespace NekuSoul.PhantomTool
 			Clipboard.SetText(deckExport.ToString());
 		}
 
-		private void MenuItemExtractCardArt_Click(object sender, RoutedEventArgs e)
-		{
-			CardArtImporter.ImportCardArt(GameData.Sets);
-		}
-
 		private void MoveLeftButton_Click(object sender, RoutedEventArgs e)
 		{
 			MoveCard(OutputListBoxB, OutputListBoxA);

@@ -10,7 +10,6 @@
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File">
                 <MenuItem Header="Refresh Collection" Click="MenuItemRefreshCollection_Click"/>
-                <MenuItem Header="Extract Cardart" Click="MenuItemExtractCardArt_Click"/>
                 <MenuItem Header="Exit" Click="MenuItemExit_Click"/>
             </MenuItem>
         </Menu>
