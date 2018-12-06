@@ -6,15 +6,20 @@
              xmlns:local="clr-namespace:NekuSoul.PhantomTool"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="300">
+             d:DesignHeight="450" d:DesignWidth="180">
     <StackPanel>
-        <Label>Presets:</Label>
-        <CheckBox Name="SealedRuleCheckBox" Checked="SealedRuleCheckBox_Checked" Unchecked="SealedRuleCheckBox_Unchecked">Use Sealed rules</CheckBox>
-        <Label>Amount:</Label>
-        <DockPanel>
-            <xctk:IntegerUpDown Name="AmountIntegerUpDown" DockPanel.Dock="Right" Minimum="1" Maximum="250" Width="45" HorizontalContentAlignment="Right" Value="90" ValueChanged="AmountIntegerUpDown_ValueChanged"/>
-            <Slider Name="AmountSlider" Minimum="1" Maximum="250" Value="90" SmallChange="1" LargeChange="10" IsSnapToTickEnabled="True" ValueChanged="AmountSlider_ValueChanged"/>
-        </DockPanel>
+        <Label>Amount of boosters:</Label>
+        <xctk:IntegerUpDown Name="BoosterIntegerUpDown" Minimum="0" Maximum="10" Value="8" Width="50" HorizontalAlignment="Right"/>
+        <Label>Commons per booster:</Label>
+        <xctk:IntegerUpDown Name="CommonIntegerUpDown" Minimum="0" Maximum="50" Value="10" Width="50" HorizontalAlignment="Right"/>
+        <Label>Uncommons per booster:</Label>
+        <xctk:IntegerUpDown Name="UncommonIntegerUpDown" Minimum="0" Maximum="50" Value="3" Width="50" HorizontalAlignment="Right"/>
+        <Label>Rare/Mythics per booster:</Label>
+        <xctk:IntegerUpDown Name="RareMythicIntegerUpDown" Minimum="0" Maximum="50" Value="1" Width="50" HorizontalAlignment="Right"/>
+        <Label>Nonbasic lands per booster:</Label>
+        <xctk:IntegerUpDown Name="LandIntegerUpDown" Minimum="0" Maximum="50" Value="1" Width="50" HorizontalAlignment="Right"/>
+        <Label>Fully random cards per booster:</Label>
+        <xctk:IntegerUpDown Name="AnyIntegerUpDown" Minimum="0" Maximum="50" Value="0" Width="50" HorizontalAlignment="Right"/>
         <Label>Sets:</Label>
         <xctk:CheckListBox Name="SetCheckListBox" HorizontalContentAlignment="Stretch"/>
         <Label>Seed:</Label>

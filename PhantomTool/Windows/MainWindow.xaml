@@ -21,14 +21,14 @@
         </StatusBar>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="180"/>
                 <ColumnDefinition Width="30"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="30"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <DockPanel Grid.Column="0">
-                <Button DockPanel.Dock="Bottom" Click="ButtonClicked">Generate new Phantom Sealed challenge</Button>
+                <Button DockPanel.Dock="Bottom" Click="ButtonClicked">Generate new set</Button>
                 <phantomTool:GenerationSettingsControl x:Name="GenerationSettingsControl"/>
             </DockPanel>
             <DockPanel Grid.Column="2">

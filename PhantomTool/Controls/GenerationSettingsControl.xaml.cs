@@ -21,60 +21,31 @@ namespace NekuSoul.PhantomTool
 			}
 		}
 
-		private void AmountSlider_ValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
-		{
-			if (AmountSlider == null || AmountIntegerUpDown == null)
-				return;
-
-			AmountIntegerUpDown.Value = (int)AmountSlider.Value;
-		}
-
-		private void AmountIntegerUpDown_ValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<object> e)
-		{
-			if (AmountSlider == null || AmountIntegerUpDown == null)
-				return;
-
-			AmountSlider.Value = AmountIntegerUpDown.Value ?? 90;
-		}
-
 		public GeneratorSettings GetSettings()
 		{
-			if (SealedRuleCheckBox.IsChecked ?? false)
-			{
-				List<CardRestiction> restrictions = new List<CardRestiction>();
+			List<CardRestiction> restictions = new List<CardRestiction>();
 
-				restrictions.AddRange(Enumerable.Repeat<CardRestiction>(c => c.CardTypes.All(t => t != CardType.Land) && c.CardRarity == CardRarity.Common, 10 * 6));
-				restrictions.AddRange(Enumerable.Repeat<CardRestiction>(c => c.CardTypes.All(t => t != CardType.Land) && c.CardRarity == CardRarity.Uncommon, 3 * 6));
-				restrictions.AddRange(Enumerable.Repeat<CardRestiction>(c => c.CardTypes.All(t => t != CardType.Land) && c.CardRarity == CardRarity.Rare || c.CardRarity == CardRarity.Mythic, 1 * 6));
-				restrictions.AddRange(Enumerable.Repeat<CardRestiction>(c => c.CardTypes.Any(t => t == CardType.Land), 1 * 6));
+			bool CommonRestriction(Card c) => c.CardTypes.All(t => t != CardType.Land) && c.CardRarity == CardRarity.Common;
+			bool UncommonRestriction(Card c) => c.CardTypes.All(t => t != CardType.Land) && c.CardRarity == CardRarity.Uncommon;
+			bool RareMythicRestriction(Card c) => c.CardTypes.All(t => t != CardType.Land) && c.CardRarity == CardRarity.Rare || c.CardRarity == CardRarity.Mythic;
+			bool LandRestriction(Card c) => c.CardTypes.Any(t => t == CardType.Land);
+			bool AnyRestriction(Card c) => true;
 
-				return new GeneratorSettings
-				{
-					Amount = 90,
-					Seed = string.IsNullOrWhiteSpace(SeedTextBox.Text) ? null : SeedTextBox.Text,
-					Sets = (from s in SetCheckListBox.SelectedItems.Cast<string>() select s).ToArray(),
-					PerPickRestrictions = restrictions.ToArray()
-				};
-			}
+			int multiplier = BoosterIntegerUpDown.Value ?? 0;
+
+			restictions.AddRange(Enumerable.Repeat((CardRestiction)CommonRestriction, (CommonIntegerUpDown.Value ?? 0) * multiplier));
+			restictions.AddRange(Enumerable.Repeat((CardRestiction)UncommonRestriction, (UncommonIntegerUpDown.Value ?? 0) * multiplier));
+			restictions.AddRange(Enumerable.Repeat((CardRestiction)RareMythicRestriction, (RareMythicIntegerUpDown.Value ?? 0) * multiplier));
+			restictions.AddRange(Enumerable.Repeat((CardRestiction)LandRestriction, (LandIntegerUpDown.Value ?? 0) * multiplier));
+			restictions.AddRange(Enumerable.Repeat((CardRestiction)AnyRestriction, (AnyIntegerUpDown.Value ?? 0) * multiplier));
 
 			return new GeneratorSettings
 			{
-				Amount = (int)AmountSlider.Value,
+				Amount = restictions.Count,
+				PerPickRestrictions = restictions.ToArray(),
 				Seed = string.IsNullOrWhiteSpace(SeedTextBox.Text) ? null : SeedTextBox.Text,
 				Sets = (from s in SetCheckListBox.SelectedItems.Cast<string>() select s).ToArray()
 			};
-		}
-
-		private void SealedRuleCheckBox_Checked(object sender, System.Windows.RoutedEventArgs e)
-		{
-			AmountIntegerUpDown.IsEnabled = false;
-			AmountSlider.IsEnabled = false;
-		}
-
-		private void SealedRuleCheckBox_Unchecked(object sender, System.Windows.RoutedEventArgs e)
-		{
-			AmountIntegerUpDown.IsEnabled = true;
-			AmountSlider.IsEnabled = true;
 		}
 	}
 }
