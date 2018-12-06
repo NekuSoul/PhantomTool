@@ -1,4 +1,4 @@
-# PhantomFriend
+# PhantomTool
 
 Phantom Sealed generator for MTGA.
 
