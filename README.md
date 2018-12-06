@@ -1,3 +1,38 @@
 # PhantomFriend
 
-Phantom Sealed generator for MTGA
+Phantom Sealed generator for MTGA.
+
+## Features
+
+* Generate a list of cards for to use for a phantom Sealed match from your collection of cards.
+* Use either the default rules for sealed or customize them.
+* Built-in basic deck editor and export button for easy importing into MTGA.
+* Automatically reads all available cards from the game. No update needed after a new set releases.
+
+## Usage
+
+### Requirements
+
+* [.NET Framework 4.7.2](https://dotnet.microsoft.com/download/dotnet-framework-runtime)
+
+### How to use
+
+* Grab the latest release from the releases section
+* Extract the archive to a folder
+* Launch `PhantomTool.exe`
+
+### Known issues
+
+* No collected cards are recognized.
+  * Launch MTGA and exit after the main menu appears. Then select `File > Refresh collection`
+
+## Buiild
+
+* This tool makes use of AssetStudio. Get the latest release [from here](https://github.com/Perfare/AssetStudio) and copy the following libraries into the `/Dependencies` folder:
+  * AssetStudio.dll
+  * AssetStudioUtility.dll
+  * SharpDX.dll
+  * SharpDX.Mathematics.dll
+  * System.Half.dll
+  * TextureConverter.dll
+  * TextureConverterWrapper.dll
