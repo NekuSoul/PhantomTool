@@ -10,9 +10,9 @@ using System.Windows;
 [assembly: AssemblyTitle("PhantomTool")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("git@nekusoul.de")]
 [assembly: AssemblyProduct("PhantomTool")]
-[assembly: AssemblyCopyright("Copyright ©  2018")]
+[assembly: AssemblyCopyright("Copyright © 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
