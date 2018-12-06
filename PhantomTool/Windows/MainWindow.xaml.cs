@@ -6,6 +6,7 @@ using NekuSoul.PhantomTool.Controls;
 using NekuSoul.PhantomTool.Data;
 using NekuSoul.PhantomTool.Generator;
 using NekuSoul.PhantomTool.Importer;
+using NekuSoul.PhantomTool.Windows;
 
 namespace NekuSoul.PhantomTool
 {
@@ -145,6 +146,11 @@ namespace NekuSoul.PhantomTool
 		{
 			CounterALabel.Content = $"{(from c in OutputListBoxA.Items.Cast<CardAmountControl>() select c.CardAmount).Sum(ca => ca.Amount)} cards";
 			CounterBLabel.Content = $"{(from c in OutputListBoxB.Items.Cast<CardAmountControl>() select c.CardAmount).Sum(ca => ca.Amount)} cards";
+		}
+
+		private void MenuItemAbout_Click(object sender, RoutedEventArgs e)
+		{
+			new AboutWindow { Owner = this }.ShowDialog();
 		}
 	}
 }
