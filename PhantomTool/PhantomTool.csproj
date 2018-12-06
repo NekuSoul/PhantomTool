@@ -77,15 +77,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DecklistControl.xaml">
+    <Page Include="Controls\DecklistControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="GenerationSettingsControl.xaml">
+    <Page Include="Controls\GenerationSettingsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -100,10 +100,10 @@
     <Compile Include="Data\CardAmount.cs" />
     <Compile Include="Data\CardCollection.cs" />
     <Compile Include="Data\GameData.cs" />
-    <Compile Include="DecklistControl.xaml.cs">
+    <Compile Include="Controls\DecklistControl.xaml.cs">
       <DependentUpon>DecklistControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GenerationSettingsControl.xaml.cs">
+    <Compile Include="Controls\GenerationSettingsControl.xaml.cs">
       <DependentUpon>GenerationSettingsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Generator\GeneratorSettings.cs" />
@@ -112,7 +112,7 @@
     <Compile Include="Importer\CardArtImporter.cs" />
     <Compile Include="Importer\DataImporter.cs" />
     <Compile Include="Importer\CollectionImporter.cs" />
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>

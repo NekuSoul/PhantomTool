@@ -1,11 +1,5 @@
-﻿using System;
-using System.IO;
-using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using FMOD;
 using NekuSoul.PhantomTool.Data;
 using NekuSoul.PhantomTool.Importer;
 
