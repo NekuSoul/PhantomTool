@@ -9,6 +9,10 @@ Phantom Sealed generator for MTGA.
 * Built-in basic deck editor and export button for easy importing into MTGA.
 * Automatically reads all available cards from the game. No update needed after a new set releases.
 
+## Screenshots
+
+![MainWindow](https://share.nekusoul.de/git/phantomtool/main.png)
+
 ## Usage
 
 ### Requirements
