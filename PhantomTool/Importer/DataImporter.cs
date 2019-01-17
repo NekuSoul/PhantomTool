@@ -11,8 +11,8 @@ namespace NekuSoul.PhantomTool.Importer
 	{
 		internal static Card[] ImportCards()
 		{
-			var assetDirectory = new DirectoryInfo(Path.Combine(Helper.GetInstallPath(), @"MTGA_Data\Downloads\AssetBundle"));
-			var cardFile = assetDirectory.EnumerateFiles("data_cards*").First();
+			var dataDirectory = new DirectoryInfo(Path.Combine(Helper.GetInstallPath(), @"MTGA_Data\Downloads\Data"));
+			var cardFile = dataDirectory.EnumerateFiles("data_cards*").First();
 
 			StringBuilder jsonExcerpt = new StringBuilder();
 
@@ -62,8 +62,8 @@ namespace NekuSoul.PhantomTool.Importer
 
 		private static JsonLocalization[] GetLocalizations()
 		{
-			var assetDirectory = new DirectoryInfo(Path.Combine(Helper.GetInstallPath(), @"MTGA_Data\Downloads\AssetBundle"));
-			var localizationFile = assetDirectory.EnumerateFiles("data_loc*").First();
+			var dataDirectory = new DirectoryInfo(Path.Combine(Helper.GetInstallPath(), @"MTGA_Data\Downloads\Data"));
+			var localizationFile = dataDirectory.EnumerateFiles("data_loc*").First();
 
 			StringBuilder jsonExcerpt = new StringBuilder();
 
