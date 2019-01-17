@@ -8,8 +8,8 @@
     <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">
         PhantomTool
         <LineBreak/>
-        Version: 1.1.0
+        Version: 1.2.0
         <LineBreak/>
-        Copyright © 2018 git@nekusoul.de
+        Copyright © 2019 git@nekusoul.de
     </TextBlock>
 </Window>
