@@ -18,6 +18,7 @@ Phantom Sealed generator for MTGA.
 ### Requirements
 
 * [.NET Framework 4.7.2](https://dotnet.microsoft.com/download/dotnet-framework-runtime)
+* [Magic: The Gathering Arena](https://magic.wizards.com/en/mtgarena)
 
 ### How to use
 
