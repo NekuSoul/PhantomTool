@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -54,7 +55,8 @@ namespace NekuSoul.PhantomTool
 		private void RefreshCollection()
 		{
 			_collection = CollectionImporter.ImportCollection();
-			UpdateStatusLabel();
+            GC.Collect();
+            UpdateStatusLabel();
 		}
 
 		private void UpdateStatusLabel()

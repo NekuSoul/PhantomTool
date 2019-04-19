@@ -1,21 +1,26 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using NekuSoul.PhantomTool.Importer;
 
 namespace NekuSoul.PhantomTool.Data
 {
-	public static class GameData
-	{
-		public static Card[] Cards { get; }
-		public static string[] Sets { get; }
-		public static string[] PlayableSets { get; }
+    public static class GameData
+    {
+        public static Card[] Cards { get; }
+        public static string[] Sets { get; }
+        public static string[] PlayableSets { get; }
 
-		static GameData()
-		{
-			Cards = DataImporter.ImportCards();
-			Sets = (from c in Cards select c.Set).Distinct().OrderBy(s => s).ToArray();
-			PlayableSets = Sets.Except(new[] { "ANA", "ArenaSUP" }).ToArray();
-			Task.Run(() => CardArtImporter.ImportCardArt(Sets));
-		}
-	}
+        static GameData()
+        {
+            Cards = DataImporter.ImportCards();
+            Sets = (from c in Cards select c.Set).Distinct().OrderBy(s => s).ToArray();
+            PlayableSets = Sets.Except(new[] { "ANA", "ArenaSUP" }).ToArray();
+            Task.Run(() =>
+            {
+                CardArtImporter.ImportCardArt(Sets);
+                GC.Collect();
+            });
+        }
+    }
 }

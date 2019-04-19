@@ -13,7 +13,7 @@ namespace NekuSoul.PhantomTool.Importer
 			var assetDirectory = new DirectoryInfo(Path.Combine(Helper.GetInstallPath(), @"MTGA_Data\Logs\Logs"));
 			foreach (var logFile in assetDirectory.EnumerateFiles().OrderByDescending(fi => fi.CreationTimeUtc))
 			{
-				const string startLine = @"<== PlayerInventory.GetPlayerCardsV3(13)";
+				const string startLine = @"<== PlayerInventory.GetPlayerCardsV";
 				const string endLine = @"}</div></div>";
 
 				bool isCollectionPart = false;
@@ -24,7 +24,7 @@ namespace NekuSoul.PhantomTool.Importer
 
 				foreach (var line in File.ReadLines(logFile.FullName))
 				{
-					if (line == startLine)
+					if (line.StartsWith(startLine))
 						isCollectionPart = true;
 
 					if (isCollectionPart)
