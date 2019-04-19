@@ -1,6 +1,6 @@
 ﻿using System.Windows;
-using NekuSoul.PhantomTool.Data;
-using NekuSoul.PhantomTool.Importer;
+using System.Windows.Interop;
+using System.Windows.Media;
 
 namespace NekuSoul.PhantomTool
 {
@@ -8,7 +8,10 @@ namespace NekuSoul.PhantomTool
 	/// Interaction logic for App.xaml
 	/// </summary>
 	public partial class App : Application
-	{
-
-	}
+    {
+        public App()
+        {
+            RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
+        }
+    }
 }
