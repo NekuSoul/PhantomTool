@@ -12,6 +12,7 @@ Phantom Sealed generator for MTGA.
 ## Screenshots
 
 ![MainWindow](https://share.nekusoul.de/git/phantomtool/main.png)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FNekuSoul%2FPhantomTool.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FNekuSoul%2FPhantomTool?ref=badge_shield)
 
 ## Usage
 
@@ -41,3 +42,7 @@ Phantom Sealed generator for MTGA.
   * System.Half.dll
   * TextureConverter.dll
   * TextureConverterWrapper.dll
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FNekuSoul%2FPhantomTool.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FNekuSoul%2FPhantomTool?ref=badge_large)
